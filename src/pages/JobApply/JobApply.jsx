@@ -25,7 +25,7 @@ const JobApply = () => {
       resume,
     };
 
-    fetch("http://localhost:5000/job-applications", {
+    fetch("https://job-portal-server-phi-henna.vercel.app/job-applications", {
       method: "POST",
       headers: {
         "content-type": "application/json",

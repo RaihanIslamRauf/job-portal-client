@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyApplications = () => {
   const { user } = useAuth();
   const [jobs, setJobs] = useState([]);
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    // fetch(`http://localhost:5000/job-applications?email=${user.email}`)
+    // fetch(`https://job-portal-server-phi-henna.vercel.app/job-applications?email=${user.email}`)
     //   .then((res) => {
     //     if (!res.ok) {
     //       throw new Error(`HTTP error! status: ${res.status}`);
@@ -17,9 +19,11 @@ const MyApplications = () => {
     //   .then((data) => setJobs(data))
     //   .catch((err) => console.error("Error fetching jobs:", err));
 
-    axios.get(`http://localhost:5000/job-applications?email=${user.email}`, { withCredentials:true })
-    .then(res => console.log(setJobs(res.data)))
+    // axios.get(`https://job-portal-server-phi-henna.vercel.app/job-applications?email=${user.email}`, { withCredentials:true })
+    // .then(res => console.log(setJobs(res.data)))
 
+    axiosSecure.get(`/job-applications?email=${user.email}`)
+    .then(res => console.log(setJobs(res.data)))
 
   }, [user.email]);
 
